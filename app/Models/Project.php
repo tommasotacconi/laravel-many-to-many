@@ -18,7 +18,11 @@ class Project extends Model
 		'end_date'
 	];
 
-	public function type () {
+	public function type() {
 			return $this->belongsTo(Type::class);
+	}
+
+	public function technologie() {
+		return $this->bolongsToMany(Technology::class);
 	}
 }
