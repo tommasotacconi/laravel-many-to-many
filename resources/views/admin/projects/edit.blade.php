@@ -48,6 +48,16 @@
         <label for="input-end-date" class="form-label">Data di fine</label>
         <input type="date" class="form-control" id="input-end-date" placeholder="" name="end_date" value="{{ $editing_project->end_date }}">
       </div>
+			<div class="col-12">
+				Technologies:
+				{{-- @dd($editing_project->technologies) --}}
+				@foreach ($technologies as $technology)
+					<div class="form-check">
+						<input class="technologies-input" type="checkbox" id="technologies-input" name="technologies[]" value="{{ $technology->id }}" @if ($editing_project->technologies->contains($technology->id)) checked @endif>
+						<label class="technologies-label" for="technologies-input">{{ $technology->name }}</label>
+					</div>
+				@endforeach
+			</div>
       <div class="col-12">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="gridCheck">
