@@ -17,5 +17,14 @@
 	<div class="project-property">
 		<b>Data d'inizio</b>: {{ $project->start_date }} <b class="ms-3">Data di fine</b>: {{ $project->end_date }}
 	</div>
+	<div class="project-property">
+		{{-- Type added by means of relation functions in controller  --}}
+		<b>Technologies</b>:
+		<ul>
+			@foreach ($project->technologies as $technology)
+				<li>{{ $technology->name }}</li>
+			@endforeach
+		</ul>
+	</div>
 </div>
 @endsection
