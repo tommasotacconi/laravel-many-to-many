@@ -53,8 +53,8 @@
 				{{-- @dd($editing_project->technologies) --}}
 				@foreach ($technologies as $technology)
 					<div class="form-check">
-						<input class="technologies-input" type="checkbox" id="technologies-input" name="technologies[]" value="{{ $technology->id }}" @if ($editing_project->technologies->contains($technology->id)) checked @endif>
-						<label class="technologies-label" for="technologies-input">{{ $technology->name }}</label>
+						<input class="technologies-input" type="checkbox" id="technology-{{ $technology->name }}" name="technologies[]" value="{{ $technology->id }}" @if ($editing_project->technologies->contains($technology->id)) checked @endif>
+						<label class="technologies-label" for="technology-{{ $technology->name }}">{{ $technology->name }}</label>
 					</div>
 				@endforeach
 			</div>
