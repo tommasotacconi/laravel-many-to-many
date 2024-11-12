@@ -20,6 +20,9 @@
 	<div class="project-property">
 		{{-- Type added by means of relation functions in controller  --}}
 		<b>Technologies</b>:
+		@if (!isset($project->technologies[0]))
+			no related technologies
+		@endif
 		<ul>
 			@foreach ($project->technologies as $technology)
 				<li>{{ $technology->name }}</li>
