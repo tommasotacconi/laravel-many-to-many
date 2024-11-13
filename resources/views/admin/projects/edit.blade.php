@@ -23,7 +23,7 @@
       </div>
       <div class="col-3 col-sm-4">
         <label for="input-type" class="form-label">Tipo</label>
-        <select type="text" class="form-select" id="input-type" name="type">
+        <select type="text" class="form-select" id="input-type" name="type_id">
 					@foreach ($types as $id => $type)
 						<option value="{{ $id + 1 }}"
 						@if ($type->name === $editing_project->type->name) selected @endif>

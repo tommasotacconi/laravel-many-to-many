@@ -43,6 +43,7 @@ class ProjectController extends Controller
 	public function update(ProjectRequest $request, string $id) {
 		$edited_project_data = $request->all();
 		$editing_project = Project::findOrFail($id);
+		$editing_project->technologies()->sync($request['technologies']);
 		$editing_project->update($edited_project_data);
 		return redirect()->route('admin.projects.show', ['id' => $editing_project->id]);
 	}
