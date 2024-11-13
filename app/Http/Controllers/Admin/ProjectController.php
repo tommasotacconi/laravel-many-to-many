@@ -28,7 +28,7 @@ class ProjectController extends Controller
 	}
 
 	public function store(ProjectRequest $request) {
-		$new_project = Project::create($request->all());
+		$new_project = Project::create($request->validated());
 		$new_project->technologies()->sync($request['technologies']);
 		return redirect()->route('admin.projects.show', ['id' => $new_project->id]);
 	}
@@ -41,7 +41,7 @@ class ProjectController extends Controller
 	}
 
 	public function update(ProjectRequest $request, string $id) {
-		$edited_project_data = $request->all();
+		$edited_project_data = $request->validated();
 		$editing_project = Project::findOrFail($id);
 		$editing_project->technologies()->sync($request['technologies']);
 		$editing_project->update($edited_project_data);
