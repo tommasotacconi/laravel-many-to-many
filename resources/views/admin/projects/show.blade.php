@@ -4,6 +4,9 @@
 <div class="container-lg">
 	<h1 class="text-center p-3">{{ $project->name }}</h1>
 	<div class="project-property">
+		<img src="{{ asset('/storage/' . $project->img_url) }}" alt="project image" class="img-fluid">
+	</div>
+	<div class="project-property">
 		<b>Authors</b>: {{ $project->authors }}
 	</div>
 	<div class="project-property">
