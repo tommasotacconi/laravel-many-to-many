@@ -15,7 +15,8 @@ class Project extends Model
 		'authors',
 		'arguments',
 		'start_date',
-		'end_date'
+		'end_date',
+		'img_url'
 	];
 
 	public function type() {

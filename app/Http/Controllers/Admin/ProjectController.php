@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -28,7 +29,13 @@ class ProjectController extends Controller
 	}
 
 	public function store(ProjectRequest $request) {
-		$new_project = Project::create($request->validated());
+		$new_project_data = $request->validated();
+
+		if (isset($new_project_data['img_url'])) {
+			$file_path = Storage::disk('public')->put("images/projects/", $request->img_url);
+			$new_project_data['img_url'] = $file_path;
+		}
+		$new_project = Project::create($new_project_data);
 		$new_project->technologies()->sync($request['technologies']);
 		return redirect()->route('admin.projects.show', ['id' => $new_project->id]);
 	}
@@ -42,7 +49,13 @@ class ProjectController extends Controller
 
 	public function update(ProjectRequest $request, string $id) {
 		$edited_project_data = $request->validated();
+
 		$editing_project = Project::findOrFail($id);
+		if (isset($edited_project_data['img_url'])) {
+			if ($editing_project->img_url) Storage::disk('public')->delete($editing_project->img_url);
+			$file_path = Storage::disk('public')->put("images/projects/", $request->img_url);
+			$edited_project_data['img_url'] = $file_path;
+		}
 		$editing_project->technologies()->sync($request['technologies']);
 		$editing_project->update($edited_project_data);
 		return redirect()->route('admin.projects.show', ['id' => $editing_project->id]);
